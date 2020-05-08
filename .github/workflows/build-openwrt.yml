@@ -61,6 +61,12 @@ jobs:
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
       
+    - name: 替换自带argon主题。
+      run: |
+        cd openwrt/package/lean  
+        rm -rf luci-theme-argon
+        git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
+    
     - name: 自定义插件主题。
       run: |
         cd openwrt/package
@@ -71,7 +77,6 @@ jobs:
         git clone https://github.com/awesome-openwrt/luci-app-passwall.git
         git clone https://github.com/awesome-openwrt/luci-app-openclash.git
         git clone https://github.com/rosywrt/luci-theme-rosy.git
-        git clone https://github.com/jerrykuku/luci-theme-argon.git
         
     - name: Load custom feeds
       run: |
